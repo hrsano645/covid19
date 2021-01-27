@@ -1,15 +1,15 @@
 name: data uploader
 
 on:
-  workflow_dispatch:
-  # schedule:
-  #   # 15•ª‚²‚Æ‚É‚·
-  #   - cron:  '*/15 * * * *'
+#   workflow_dispatch:
+  schedule:
+  #   # 1hã”ã¨ã«è©¦ã™
+    - cron:  '0 */1 * * *'
 env:
   MAIN_BRANCH: master
   DEVELOPMENT_BRANCH: development
 
-# ƒf[ƒ^‚Ì¶¬
+# ãƒ‡ãƒ¼ã‚¿ã®ç”Ÿæˆ
 jobs:
   data_generate:
     runs-on: ubuntu-latest
