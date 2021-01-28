@@ -20,8 +20,6 @@ jobs:
         with:
           repository: hrsano645/covid19-gen-datajson-shizuokapref
           ref: master
-          persist-credentials: false
-          token: ${{ secrets.DATA_UPLOAD_PAT }}
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
@@ -49,11 +47,9 @@ jobs:
     needs: data_generate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
         with:
           ref: ${{ env.DEVELOPMENT_BRANCH }}
-          persist-credentials: false
-          token: ${{ secrets.DATA_UPLOAD_PAT }}
       - name: Download data
         uses: actions/download-artifact@v1
         with:
