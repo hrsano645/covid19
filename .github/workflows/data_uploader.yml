@@ -1,7 +1,7 @@
 name: data uploader
 
 on:
-#   workflow_dispatch:
+  workflow_dispatch:
   schedule:
   #   # 1hごとに試す
     - cron:  '0 */1 * * *'
