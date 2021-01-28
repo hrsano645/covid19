@@ -2,9 +2,9 @@ name: data uploader
 
 on:
   workflow_dispatch:
-  schedule:
-  #   # 1hごとに試す
-    - cron:  '0 */1 * * *'
+#   schedule:
+#   #   # 1hごとに試す
+#     - cron:  '0 */1 * * *'
 env:
   MAIN_BRANCH: master
   DEVELOPMENT_BRANCH: development
@@ -36,6 +36,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: check dir
+        run: ls -la
       - name: Generate data.json
         run:  bash bat.sh
       - name: Upload data.json
