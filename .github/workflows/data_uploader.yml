@@ -14,7 +14,7 @@ jobs:
   data_generate:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.DATA_UPLOAD_PAT }}
     steps:
       - uses: actions/checkout@v2
         with:
