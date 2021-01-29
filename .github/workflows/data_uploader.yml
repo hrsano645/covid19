@@ -14,7 +14,7 @@ jobs:
   data_generate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
           repository: hrsano645/covid19-gen-datajson-shizuokapref
           ref: master
@@ -50,7 +50,7 @@ jobs:
     needs: data_generate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
           ref: ${{ env.DEVELOPMENT_BRANCH }}
           fetch-depth: 0
