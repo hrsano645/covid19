@@ -3,14 +3,19 @@ name: data uploader
 on:
   workflow_dispatch:
   # schedule:
-  #   # 15�����ƂɎ���
+  #   # 15分毎
   #   - cron:  '*/15 * * * *'
 env:
   MAIN_BRANCH: master
   DEVELOPMENT_BRANCH: development
 
-# �f�[�^�̐���
+# 
+
 jobs:
+  # データの生成をする
+  # そのままdev, masterへmergeする
+  # devの内容をそのままmasterへmergeすればいいかな
+
   data_generate:
     runs-on: ubuntu-latest
     env:
