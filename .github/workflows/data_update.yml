@@ -37,18 +37,19 @@ jobs:
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Generate jsonfiles
-        run: bash bat.sh
+        run: |
+          bash bat.sh
+          mkdir data_dist
+          cp *.json data_dist
       - name: debug:check jsonfile exist
         run: |
           pwd
-          ls -la ./*.json
+          ls -la ./data_dist/*.json
       - name: Upload jsonfiles
         uses: actions/upload-artifact@v1
         with:
           name: datajson
-          path: |
-            data.json
-            news.json
+          path: ./data_dist/*
   data_upload_development:
     needs: data_generate
     runs-on: ubuntu-latest
