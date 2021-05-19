@@ -72,6 +72,7 @@
   "60代以上": "Over 60s",
   "男性": "Male",
   "女性": "Female",
+  "公表望まず": "Do not wish to publish",
   "退院※": " Discharged*",
   "その他": {
     "parent": "Other information",
@@ -116,8 +117,9 @@
   "入院中": "Hospitalized",
   "軽症・中等症": "Mild to moderate symptoms",
   "重症": "Severe symptoms",
+  "自宅療養":"Recuperating at home",
   "宿泊療養": "Receiving treatment at lodging facilities",
-  "入院・療養等調整中": "Hospitalization / Medical treatment, etc.",
+  "入院等調整中": "Hospitalization .etc adjustments in progress",
   "死亡": "Deaths",
   "退院": "Discharged",
   "日別": "By day",
