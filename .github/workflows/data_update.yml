@@ -1,4 +1,4 @@
-name: data uploader
+name: datajson update
 
 on:
   workflow_dispatch:
