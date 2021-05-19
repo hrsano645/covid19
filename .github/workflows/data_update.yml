@@ -46,7 +46,9 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: datajson
-          path: ./*.json
+          path: |
+            data.json
+            news.json
   data_upload_development:
     needs: data_generate
     runs-on: ubuntu-latest
