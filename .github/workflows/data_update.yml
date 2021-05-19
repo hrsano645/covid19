@@ -39,7 +39,7 @@ jobs:
       - name: Generate jsonfiles
         run:  bash bat.sh
       - name: [debug]check jsonfile exist
-        run:  |
+        run: |
           pwd
           ls -la ./*.json
       - name: Upload jsonfiles
