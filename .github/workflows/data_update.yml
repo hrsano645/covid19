@@ -1,0 +1,86 @@
+name: data update
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   # 15分毎
+  #   - cron:  '*/15 * * * *'
+env:
+  MAIN_BRANCH: master
+  DEVELOPMENT_BRANCH: development
+
+jobs:
+  data_update_development:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ env.DEVELOPMENT_BRANCH }}
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r ./datagenerator/requirements.txt; fi
+      - name: Generate data.json
+        run:  bash ./datagenerator/bat.sh
+      - name: Commit files
+        run: |
+          cp -rp datagenerator/*.json data/
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/*
+          git commit -m "Auto Update Data"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ env.DEVELOPMENT_BRANCH }}
+  data_update_deploy:
+    needs: data_update_development
+    runs-on: ubuntu-latest
+    steps:
+    
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ env.MAIN_BRANCH }}
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r ./datagenerator/requirements.txt; fi
+      - name: Generate data.json
+        run:  bash ./datagenerator/bat.sh
+      - name: Commit files
+        run: |
+          cp -rp datagenerator/*.json data/
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/*
+          git commit -m "Auto Update Data"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ env.MAIN_BRANCH }}

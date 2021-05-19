@@ -99,3 +99,7 @@ ogp/*
 
 # Vagrant
 .vagrant
+
+datagenerator/tests/__pycache__/
+datagenerator/*.csv
+datagenerator/*.json
