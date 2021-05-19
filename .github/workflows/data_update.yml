@@ -37,8 +37,8 @@ jobs:
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Generate jsonfiles
-        run:  bash bat.sh
-      - name: [debug]check jsonfile exist
+        run: bash bat.sh
+      - name: debug:check jsonfile exist
         run: |
           pwd
           ls -la ./*.json
