@@ -1,4 +1,4 @@
-name: data uploader
+name: data update
 
 on:
   workflow_dispatch:
@@ -9,22 +9,13 @@ env:
   MAIN_BRANCH: master
   DEVELOPMENT_BRANCH: development
 
-# 
-
 jobs:
-  # データの生成をする
-  # そのままdev, masterへmergeする
-  # devの内容をそのままmasterへmergeすればいいかな
-
-  data_generate:
+  data_update_development:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
         with:
-          repository: hrsano645/covid19-gen-datajson-shizuokapref
-          ref: master
+          ref: ${{ env.DEVELOPMENT_BRANCH }}
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
@@ -32,38 +23,20 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-      - name: Set up Python 3.8
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.9
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements.txt ]; then pip install -r ./datagenerator/requirements.txt; fi
       - name: Generate data.json
-        run:  bash bat.sh
-      - name: Upload data.json
-        uses: actions/upload-artifact@v1
-        with:
-          name: datajson
-          path: data.json
-  data_upload_development:
-    needs: data_generate
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ env.DEVELOPMENT_BRANCH }}
-      - name: Download data
-        uses: actions/download-artifact@v1
-        with:
-          name: datajson
-      - name: recode commit time
-        run: echo `date` > data/auto_generate_time
+        run:  bash ./datagenerator/bat.sh
       - name: Commit files
         run: |
-          cp -rp datajson/* data/
+          cp -rp datagenerator/*.json data/
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/*
@@ -73,22 +46,35 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ env.DEVELOPMENT_BRANCH }}
-  data_upload_deploy:
-    needs: data_upload_development
+  data_update_deploy:
+    needs: data_update_development
     runs-on: ubuntu-latest
     steps:
+    
       - uses: actions/checkout@v2
         with:
           ref: ${{ env.MAIN_BRANCH }}
-      - name: Download data
-        uses: actions/download-artifact@v1
+      - name: Cache dependencies
+        uses: actions/cache@v2
         with:
-          name: datajson
-      - name: recode commit time
-        run: echo `date` > data/auto_generate_time
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r ./datagenerator/requirements.txt; fi
+      - name: Generate data.json
+        run:  bash ./datagenerator/bat.sh
       - name: Commit files
         run: |
-          cp -rp datajson/* data/
+          cp -rp datagenerator/*.json data/
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/*
