@@ -4,12 +4,11 @@ name: datajson update
 on:
   workflow_dispatch:
   schedule:
-  # 毎日20時に実行
-    - cron:  '0 20 * * *'
+  # 毎日20時に実行:GitHub ActionsはUTCなので、JST(UTC-9)の11時に実行
+    - cron:  '0 11 * * *'
 env:
   MAIN_BRANCH: master
   DEVELOPMENT_BRANCH: development
-
 jobs:
   data_generate:
     runs-on: ubuntu-latest
@@ -39,6 +38,10 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Generate jsonfiles
         run:  bash bat.sh
+      - name: [debug]check jsonfile exist
+        run:  |
+          pwd
+          ls -la ./*.json
       - name: Upload jsonfiles
         uses: actions/upload-artifact@v1
         with:
