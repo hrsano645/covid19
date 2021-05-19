@@ -1,15 +1,15 @@
-
-name: datajson update
+name: data uploader
 
 on:
   workflow_dispatch:
-  schedule:
-  # 毎日20時に実行
-    - cron:  '0 20 * * *'
+#   schedule:
+#   #   # 1hごとに試す
+#     - cron:  '0 */1 * * *'
 env:
   MAIN_BRANCH: master
   DEVELOPMENT_BRANCH: development
 
+# データの生成
 jobs:
   data_generate:
     runs-on: ubuntu-latest
@@ -28,22 +28,24 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-      - name: Set up Python
+      - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: 3.8
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Generate jsonfiles
+      - name: check dir
+        run: ls -la
+      - name: Generate data.json
         run:  bash bat.sh
-      - name: Upload jsonfiles
+      - name: Upload data.json
         uses: actions/upload-artifact@v1
         with:
           name: datajson
-          path: ./*.json
+          path: data.json
   data_upload_development:
     needs: data_generate
     runs-on: ubuntu-latest
@@ -58,6 +60,8 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: datajson
+      - name: recode commit time
+        run: echo `date` > data/auto_generate_time
       - name: Commit files
         run: |
           cp -rp datajson/* data/
@@ -84,6 +88,8 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: datajson
+      - name: recode commit time
+        run: echo `date` > data/auto_generate_time
       - name: Commit files
         run: |
           cp -rp datajson/* data/

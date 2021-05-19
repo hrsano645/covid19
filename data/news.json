@@ -1,14 +1,34 @@
 {
     "newsItems": [
         {
-            "date": "2020\/04\/17",
-            "url": "https:\/\/www.pref.shizuoka.jp\/kinkyu\/covid-19-taisetunaoneai.html",
-            "text": "静岡県からの大切なお願い"
+            "date": "2021/05/19",
+            "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-anzen_anshin_ninsyo.html",
+            "text": "ふじのくに安全・安心認証（飲食店）制度の御案内を開始しました"
         },
         {
-            "date": "2020\/04\/17",
-            "url": "https:\/\/www.pref.shizuoka.jp\/kinkyu\/covid-19-soudan.html",
-            "text": "新型コロナウイルス感染症の相談"
+            "date": "2021/05/19",
+            "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-tyuumokujouhou.html",
+            "text": "新型コロナウイルス陽性者が75名確認されました"
+        },
+        {
+            "date": "2021/05/17",
+            "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-jitanyousei_kosai.html",
+            "text": "湖西市における飲食店の営業時間の短縮要請について"
+        },
+        {
+            "date": "2021/05/17",
+            "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-tijikomennto.html",
+            "text": "川勝知事からのメッセージ（特措法第24条第９項に基づく要請）を掲載しました"
+        },
+        {
+            "date": "2021/05/14",
+            "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-keikailevel.html",
+            "text": "現在の警戒レベルを更新しました"
+        },
+        {
+            "date": "2021/05/12",
+            "url": "https://www.pref.shizuoka.jp/kousei/ko-130/infectioncontrol.html?edit=1",
+            "text": "児童福祉施設向け感染症対策マニュアルを掲載しました"
         }
     ]
 }
