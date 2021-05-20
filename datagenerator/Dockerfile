@@ -1,8 +1,0 @@
-FROM python:3.8
-
-ENV PYTHONUNBUFFERED 1
-ENV PROJECT_ROOTDIR /code
-WORKDIR $PROJECT_ROOTDIR
-
-COPY requirements.txt $PROJECT_ROOTDIR
-RUN pip install -r requirements.txt
