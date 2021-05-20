@@ -40,19 +40,18 @@ jobs:
         run: |
           bash bat.sh
           mkdir data_dist
-          cp *.json data_dist
+          cp *.json data_dist/
       - name: debug:check jsonfile exist
         run: |
           pwd
-          ls -la ./data_dist/*.json
+          ls -l data_dist/
       - name: Upload jsonfiles
         uses: actions/upload-artifact@v1
         with:
           name: datajson
           path: |
-            ./data_dist/
-            # ./data_dist/data.json
-            # ./data_dist/news.json
+            data_dist/data.json
+            data_dist/news.json
   data_upload_development:
     needs: data_generate
     runs-on: ubuntu-latest
