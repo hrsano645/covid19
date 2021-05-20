@@ -38,12 +38,15 @@ jobs:
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Generate jsonfiles
-        run:  bash bat.sh
+        run: |
+          bash bat.sh
+          mkdir data_dist
+          cp *.json data_dist/
       - name: Upload jsonfiles
         uses: actions/upload-artifact@v1
         with:
           name: datajson
-          path: ./*.json
+          path: data_dist
   data_upload_development:
     needs: data_generate
     runs-on: ubuntu-latest
@@ -61,6 +64,7 @@ jobs:
       - name: Commit files
         run: |
           cp -rp datajson/* data/
+          rm -rf datajson
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/*
@@ -87,6 +91,7 @@ jobs:
       - name: Commit files
         run: |
           cp -rp datajson/* data/
+          rm -rf datajson
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/*
