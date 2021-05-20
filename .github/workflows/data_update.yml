@@ -41,13 +41,6 @@ jobs:
           bash bat.sh
           mkdir data_dist
           cp *.json data_dist/
-      # - name: debug:check jsonfile exist
-      #   run: |
-      #     pwd
-      #     ls -l data_dist/
-      #     ls -l /home/runner/work/gha_test_shizuokapref_covid19/gha_test_shizuokapref_covid19/data_dist/data.json
-      #     head data_dist/data.json
-      #     head data_dist/news.json
       - name: Upload jsonfiles
         uses: actions/upload-artifact@v1
         with:
@@ -70,6 +63,7 @@ jobs:
       - name: Commit files
         run: |
           cp -rp datajson/* data/
+          rm -rf datajson
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/*
@@ -95,7 +89,8 @@ jobs:
           name: datajson
       - name: Commit files
         run: |
-          cp -rp datajson/data_dist/* data/
+          cp -rp datajson/* data/
+          rm -rf datajson
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/*
