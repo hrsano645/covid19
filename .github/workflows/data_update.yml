@@ -46,6 +46,7 @@ jobs:
           pwd
           ls -l data_dist/
           ls -l /home/runner/work/gha_test_shizuokapref_covid19/gha_test_shizuokapref_covid19/data_dist/data.json
+          head data_dist/data.json
       - name: Upload jsonfiles
         uses: actions/upload-artifact@v1
         with:
