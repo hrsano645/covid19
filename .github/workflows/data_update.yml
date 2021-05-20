@@ -74,7 +74,7 @@ jobs:
           github_token: ${{ secrets.DATA_UPLOAD_PAT }}
           branch: ${{ env.DEVELOPMENT_BRANCH }}
   data_upload_deploy:
-    needs: data_upload_development
+    needs: data_generate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
