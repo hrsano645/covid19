@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - development
+  workflow_run:
+    workflows:
+      - "datajson update"
+    branched: [development]
+    types:
+      - completed
 
 jobs:
   deploy:
