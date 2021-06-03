@@ -1,9 +1,14 @@
 {
     "newsItems": [
         {
-            "date": "2021/06/02",
+            "date": "2021/06/03",
             "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-tyuumokujouhou.html",
-            "text": "新型コロナウイルス陽性者が42名確認されました"
+            "text": "新型コロナウイルス陽性者が46名確認されました"
+        },
+        {
+            "date": "2021/05/28",
+            "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-tijikomennto.html",
+            "text": "川勝知事からのメッセージ（第４波への対応を経た今後の方針等）を掲載しました"
         },
         {
             "date": "2021/05/28",
@@ -24,16 +29,6 @@
             "date": "2021/05/17",
             "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-jitanyousei_kosai.html",
             "text": "湖西市における飲食店の営業時間の短縮要請について"
-        },
-        {
-            "date": "2021/05/17",
-            "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-tijikomennto.html",
-            "text": "川勝知事からのメッセージ（特措法第24条第９項に基づく要請）を掲載しました"
-        },
-        {
-            "date": "2021/05/12",
-            "url": "https://www.pref.shizuoka.jp/kousei/ko-130/infectioncontrol.html?edit=1",
-            "text": "児童福祉施設向け感染症対策マニュアルを掲載しました"
         }
     ]
 }
