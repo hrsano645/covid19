@@ -1,19 +1,19 @@
 {
     "newsItems": [
         {
-            "date": "2021/06/03",
+            "date": "2021/06/04",
             "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-tyuumokujouhou.html",
-            "text": "新型コロナウイルス陽性者が46名確認されました"
+            "text": "新型コロナウイルス陽性者が28名確認されました"
+        },
+        {
+            "date": "2021/06/04",
+            "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-keikailevel.html",
+            "text": "現在の警戒レベルを更新しました"
         },
         {
             "date": "2021/05/28",
             "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-tijikomennto.html",
             "text": "川勝知事からのメッセージ（第４波への対応を経た今後の方針等）を掲載しました"
-        },
-        {
-            "date": "2021/05/28",
-            "url": "https://www.pref.shizuoka.jp/kinkyu/covid-19-keikailevel.html",
-            "text": "現在の警戒レベルを更新しました"
         },
         {
             "date": "2021/05/28",
